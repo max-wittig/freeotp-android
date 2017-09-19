@@ -36,7 +36,9 @@
 
 package org.fedorahosted.freeotp;
 
+import android.widget.Toast;
 import org.fedorahosted.freeotp.add.AddActivity;
+import org.fedorahosted.freeotp.add.BarCodeActivity;
 import org.fedorahosted.freeotp.add.ScanActivity;
 
 import android.app.Activity;
@@ -112,7 +114,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.action_scan:
-            startActivity(new Intent(this, ScanActivity.class));
+            startActivityForResult(new Intent(this, BarCodeActivity.class), 0);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
             return true;
 
@@ -132,6 +134,13 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
+        Uri uri = intent.getData();
+        if (uri != null)
+            TokenPersistence.addWithToast(this, uri.toString());
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         Uri uri = intent.getData();
         if (uri != null)
             TokenPersistence.addWithToast(this, uri.toString());
