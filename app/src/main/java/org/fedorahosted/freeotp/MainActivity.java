@@ -157,7 +157,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openCamera();
                 } else {
-                    Toast.makeText(MainActivity.this, "Camera will not be available", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, R.string.error_permission_camera_open, Toast.LENGTH_LONG).show();
                 }
                 return;
             }

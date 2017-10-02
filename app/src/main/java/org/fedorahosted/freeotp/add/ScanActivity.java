@@ -41,8 +41,6 @@ import io.fotoapparat.Fotoapparat;
 import io.fotoapparat.parameter.ScaleType;
 import io.fotoapparat.parameter.selector.FocusModeSelectors;
 import io.fotoapparat.view.CameraView;
-
-import static io.fotoapparat.parameter.selector.FlashSelectors.*;
 import static io.fotoapparat.parameter.selector.FocusModeSelectors.autoFocus;
 import static io.fotoapparat.parameter.selector.FocusModeSelectors.fixed;
 import static io.fotoapparat.parameter.selector.LensPositionSelectors.back;
