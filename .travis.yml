@@ -1,8 +1,27 @@
 language: android
+jdk: oraclejdk8
+
+before_install:
+  - chmod +x gradlew
+  - android list target
+  - ADB_INSTALL_TIMEOUT=10
 
 android:
   components:
     - tools
+    - tools # This is not a typo. Needed for SDK update.
     - platform-tools
-    - build-tools-26.0.1
     - android-26
+    - build-tools-26.0.2
+    - extra-android-m2repository
+  before_script:
+  - sys-img-armeabi-v7a-android-26
+  - echo no | android create avd --force -n test -t android-26 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb devices
+  - adb wait-for-device
+  - adb -s emulator-5556 shell input keyevent 82 &
+
+  script:
+    - ./gradlew connectedAndroidTest
