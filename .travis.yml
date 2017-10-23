@@ -7,3 +7,7 @@ android:
     - build-tools-26.0.1
     - android-26
     - sys-img-armeabi-v7a-android-23
+    
+install: true
+script:
+  - ./gradlew assembleRelease --stacktrace
