@@ -14,9 +14,9 @@ cache:
 env:
  global:
  - ANDROID_API=25
- - EMULATOR_API=24
+ - EMULATOR_API=25
  - ANDROID_BUILD_TOOLS=25.0.2
- - ADB_INSTALL_TIMEOUT=5 # minutes
+ - ADB_INSTALL_TIMEOUT=10 # minutes
 
 android:
  components:
@@ -47,10 +47,10 @@ before_install:
 #Source: https://medium.com/@oldergod/constraint-layout-and-circleci-travis-d50342696d2
 
 before_script:
-- echo "y" | android update sdk -a --no-ui --filter android-24
-- echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-24
+- echo "y" | android update sdk -a --no-ui --filter android-25
+- echo "y" | android update sdk -a --no-ui --filter sys-img-armeabi-v7a-android-25
 - android list targets | grep -E '^id:' | awk -F '"' '{$1=""; print $2}' # list all targets
-- echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
+- echo no | android create avd --force -n test -t android-25 --abi armeabi-v7a
 - emulator -avd test -no-skin -no-window &
 - android-wait-for-emulator
 - adb shell input keyevent 82 &
