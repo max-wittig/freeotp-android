@@ -4,6 +4,7 @@ dist: trusty
 env:
   global:
     - ADB_INSTALL_TIMEOUT=15
+    - ANDROID_ABI=google_apis/armeabi-v7a
 
 android:
   components:
