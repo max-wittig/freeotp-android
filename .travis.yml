@@ -1,29 +1,23 @@
 language: android
-dist: trusty
-
+jdk: oraclejdk8
 env:
   global:
-    - ADB_INSTALL_TIMEOUT=15
-    - ANDROID_ABI=google_apis/armeabi-v7a
+    - ANDROID_TARGET=android-23
+    - ANDROID_ABI=x86
 
 android:
   components:
-    - tools
-    - platform-tools
-    - build-tools-26.0.2
-    - android-26
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-    - sys-img-armeabi-v7a-google_apis-25
-
-before_script:
-  - echo no | android create avd --force -n test -t android-26
-  - emulator -avd test -no-audio -no-window &
-  - android-wait-for-emulator
-  - sleep 180
-  - adb devices
-  - adb shell input keyevent 82 &
-
+  - tools
+  - platform-tools
+  - build-tools-26.0.2
+  - android-23
+  - extra-android-m2repository
+  - extra-google-m2repository
+  - sys-img-x86-android-23
 script:
-   - ./gradlew build connectedCheck -PdisablePreDex
+  - android list targets
+  - echo no | android create avd --force -n test -t android-23 --abi x86 -no-accel
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
+  - ./gradlew connectedAndroidTest
