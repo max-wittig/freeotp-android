@@ -119,7 +119,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
         unregisterReceiver(receiver);
     }
 
-    @Override
+    @Override 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         menu.findItem(R.id.action_scan).setVisible(ScanActivity.hasCamera(this));

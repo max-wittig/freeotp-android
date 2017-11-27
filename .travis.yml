@@ -1,6 +1,7 @@
 language: android
 
 before_install:
+  - set -e
   - git fetch --unshallow
   - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
   - export NVM_DIR="$HOME/.nvm"
@@ -9,6 +10,9 @@ before_install:
   - nvm install v8
   - npm install --save-dev @commitlint/{config-conventional,cli}
   - chmod +x lint-commits.sh
+
+script:
+  - set -e
   - ./lint-commits.sh
 
 android:

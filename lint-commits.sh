@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eu
+set -e
 
 if [[ $TRAVIS_PULL_REQUEST_SLUG != "" && $TRAVIS_PULL_REQUEST_SLUG != $TRAVIS_REPO_SLUG ]]; then
     # forked repo
